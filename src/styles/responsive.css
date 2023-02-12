@@ -1,0 +1,47 @@
+:root {
+  --bg-color: #EADCA6;
+  --dark-color: #C36A2D;
+}
+
+@media only screen and (min-width: 768px) {
+    .banner {
+        display: block;
+        width: 50%;
+        /* background-color: red; */
+        flex: auto;
+        background: linear-gradient(rgba(195, 106, 45, .4),rgba(195, 106, 45, .4)),
+ url("../img/banner1.jpg") center/cover;
+    }
+
+    .login-section, .register-section {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-page, .register-page {
+        flex-direction: row;
+        min-height: unset;
+        height: 100vh;
+        padding: 0;
+    }
+
+    .login-card, .register-card {
+        border-radius: 10px;
+    }
+
+    
+}
+
+@media only screen and (min-width: 1024px) {
+    .login-card, .register-card {
+        min-width: 80%;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .login-card, .register-card {
+        min-width: 70%;
+    }
+} 
