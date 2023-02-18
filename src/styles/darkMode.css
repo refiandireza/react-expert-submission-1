@@ -1,0 +1,50 @@
+.dark .header {
+  background-color: #17181B
+}
+
+.dark main {
+    background-color: #2e3134;
+}
+
+.dark .homepage h1 {
+    color: #fff;
+}
+
+.dark .thread-item {
+    background-color: #5f6368;
+    color: #fff;
+}
+
+.dark .thread-time span, .dark .thread-time svg {
+    color: #fff;
+}
+
+.dark .category span {
+    background-color: #282a2d;
+}
+
+.dark .vote-section span.active {
+    color: #17181B;
+}
+
+.dark footer {
+    background-color: #17181B;
+}
+
+.dark .navigation {
+    background-color: #202124;
+}
+
+.dark .navigation a {
+    color: #fff;
+}
+
+.dark .btn-theme {
+    color: #fff;
+}
+
+.dark .btn-add {
+    border-color: #fff;
+    background-color: #2e3134;
+    color: #fff;
+}

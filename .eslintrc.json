@@ -5,6 +5,7 @@
         "node": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
         "airbnb",
         "react-app"
@@ -30,5 +31,6 @@
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-props-no-spreading": "off",
         "import/no-extraneous-dependencies": "off"
+        
     }
 }

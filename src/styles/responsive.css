@@ -31,6 +31,12 @@
         border-radius: 10px;
     }
 
+    .modal-card {
+        max-width: 70%;
+    }
+
+    
+
     
 }
 
@@ -38,6 +44,20 @@
     .login-card, .register-card {
         min-width: 80%;
     }
+    
+    .hamburger-react {
+        display: none;
+        visibility: hidden;
+    }
+
+    .btn-add {
+        display: none;
+    }
+
+    .modal-card {
+        max-width: 50%;
+    }
+
 }
 
 @media only screen and (min-width: 1440px) {
