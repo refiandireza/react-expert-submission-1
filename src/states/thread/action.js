@@ -73,13 +73,12 @@ function asyncAddThread({ title, body, category = '' }) {
 function asyncUpvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    dispatch(upvoteThreadActionCreator({ threadId, userId: authUser }));
-
+    dispatch(upvoteThreadActionCreator({ threadId, userId: authUser.id }));
     try {
       await api.upVoteThread(threadId);
     } catch (error) {
       alert(error.message);
-      dispatch(upvoteThreadActionCreator({ threadId, userId: authUser }));
+      dispatch(upvoteThreadActionCreator({ threadId, userId: authUser.id }));
     }
   };
 }
@@ -87,13 +86,13 @@ function asyncUpvoteThread(threadId) {
 function asyncDownvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    dispatch(downvoteThreadActionCreator({ threadId, userId: authUser }));
+    dispatch(downvoteThreadActionCreator({ threadId, userId: authUser.id }));
 
     try {
       await api.downVoteThread(threadId);
     } catch (error) {
       alert(error.message);
-      dispatch(downvoteThreadActionCreator({ threadId, userId: authUser }));
+      dispatch(downvoteThreadActionCreator({ threadId, userId: authUser.id }));
     }
   };
 }
@@ -101,13 +100,13 @@ function asyncDownvoteThread(threadId) {
 function asyncNeutralvoteThread(threadId) {
   return async (dispatch, getState) => {
     const { authUser } = getState();
-    dispatch(neutralvoteThreadkActionCreator({ threadId, userId: authUser }));
+    dispatch(neutralvoteThreadkActionCreator({ threadId, userId: authUser.id }));
 
     try {
       await api.neutralVoteThread(threadId);
     } catch (error) {
       alert(error.message);
-      dispatch(neutralvoteThreadkActionCreator({ threadId, userId: authUser }));
+      dispatch(neutralvoteThreadkActionCreator({ threadId, userId: authUser.id }));
     }
   };
 }

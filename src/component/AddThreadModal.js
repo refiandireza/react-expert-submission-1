@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { IoCloseCircle } from 'react-icons/io5';
 
-function AddThreadModal() {
+function AddThreadModal({ addThread }) {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [body, setBody] = useState('');
@@ -30,9 +31,11 @@ function AddThreadModal() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    addThread(title, body, category);
     setTitle('');
     setCategory('');
     document.querySelector('.input-body').innerHTML = '';
+    closeModal(event);
   };
 
   return (
@@ -53,5 +56,9 @@ function AddThreadModal() {
     </div>
   );
 }
+
+AddThreadModal.propTypes = {
+  addThread: PropTypes.func.isRequired,
+};
 
 export default AddThreadModal;

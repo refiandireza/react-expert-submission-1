@@ -2,17 +2,46 @@
 import React from 'react';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import {
   IoCaretDown, IoCaretUp, IoEllipse, IoChatboxEllipses,
 } from 'react-icons/io5';
-import profile from '../img/sample-profile.png';
 import { postedAt } from '../utils';
 
 function ThreadItem({
-  id, title, body, category, createdAt, totalComments, user, upVotesBy, downVotesBy,
+  id, title, body, category, createdAt, totalComments, user, upVotesBy, downVotesBy, upvote, neutralvote, authUser, downvote,
 }) {
+  const isUpVote = upVotesBy.includes(authUser);
+  const isDownVote = downVotesBy.includes(authUser);
+  const navigate = useNavigate();
+
+  const onUpvoteClick = (event) => {
+    event.stopPropagation();
+    upvote(id);
+  };
+
+  const onDownvoteClick = (event) => {
+    event.stopPropagation();
+    downvote(id);
+  };
+
+  const onNeutralClick = (event) => {
+    event.stopPropagation();
+    neutralvote(id);
+  };
+
+  const onTalkPress = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      navigate(`/threads/${id}`);
+    }
+  };
+
+  const onThreadClick = () => {
+    navigate(`/threads/${id}`);
+  };
+
   return (
-    <div className="thread-item">
+    <div className="thread-item" role="button" tabIndex={0} onKeyDown={onTalkPress} onClick={onThreadClick}>
       <div className="thread-header">
         <div className="thread-creator">
           <div className="thread-profile">
@@ -45,16 +74,16 @@ function ThreadItem({
           </div>
         </div>
         <div className="vote-section">
-          <span className="active">
+          <button className={isUpVote ? 'active' : ''} type="button" onClick={isUpVote ? onNeutralClick : onUpvoteClick}>
             <IoCaretUp />
             {' '}
             {upVotesBy.length}
-          </span>
-          <span>
+          </button>
+          <button className={isDownVote ? 'active' : ''} type="button" onClick={isDownVote ? onNeutralClick : onDownvoteClick}>
             <IoCaretDown />
             {' '}
             {downVotesBy.length}
-          </span>
+          </button>
           <span className="comment">
             <IoChatboxEllipses />
             {' '}
@@ -78,7 +107,7 @@ const threadItemShape = {
   body: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  // authUser: PropTypes.string.isRequired,
+  authUser: PropTypes.string,
   user: PropTypes.shape(userShape).isRequired,
 };
 

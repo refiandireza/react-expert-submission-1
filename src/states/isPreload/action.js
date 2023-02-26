@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { getTheme } from '../../utils';
-import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../authUser/action';
-import { setThemeActionCreator } from '../theme/action';
+import api from '../../utils/api';
 
 const ActionType = {
   SET_IS_PRELOAD: 'SET_IS_PRELOAD',

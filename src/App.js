@@ -6,7 +6,8 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './styles/App.css';
-import { IoAddCircle } from 'react-icons/io5';
+
+import { ToastContainer } from 'react-toastify';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Header from './component/Header';
@@ -16,6 +17,11 @@ import Footer from './component/Footer';
 import Loading from './component/Loading';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import AddThreadModal from './component/AddThreadModal';
+import { asyncUnsetAuthUser } from './states/authUser/action';
+import { asyncAddThread } from './states/thread/action';
+import DetailPage from './pages/DetailPage';
+import ThemeBtn from './component/ThemeBtn';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   const {
@@ -31,11 +37,12 @@ function App() {
     document.documentElement.setAttribute('class', theme);
   }, [theme]);
 
-  const showModal = () => {
-    const modalContainer = document.querySelector('.modal-container');
-    const body = document.querySelector('body');
-    modalContainer.classList.add('active');
-    body.style.overflow = 'hidden';
+  const onAddThread = (title, body, category) => {
+    dispatch(asyncAddThread({ title, body, category }));
+  };
+
+  const onSignOut = () => {
+    dispatch(asyncUnsetAuthUser());
   };
 
   if (isPreload) {
@@ -46,18 +53,21 @@ function App() {
     <>
       <Loading />
       <div className="App">
-        <Header />
+        <Header signOut={onSignOut} />
+        <ToastContainer />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="" element={<LeaderboardPage />} />
-            {/* <Route path="/*" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} /> */}
+            <Route path="/leaderboards" element={<LeaderboardPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/threads/:id" element={<DetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
-        <AddThreadModal />
-        {authUser !== null && <button type="button" className="btn-add" aria-label="add thread button" onClick={showModal}><IoAddCircle/></button>}
+        <ThemeBtn />
+        <AddThreadModal addThread={onAddThread} />
       </div>
     </>
   );

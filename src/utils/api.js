@@ -24,7 +24,7 @@ const api = (() => {
   }) {
     const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
-      header: {
+      headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -76,6 +76,10 @@ const api = (() => {
     const responseJson = await response.json();
 
     const { status, message } = responseJson;
+
+    if (message === 'Missing authentication') {
+      return false;
+    }
 
     if (status !== 'success') {
       throw new Error(message);
@@ -153,8 +157,8 @@ const api = (() => {
     return thread;
   }
 
-  async function createComment(id, { content }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
+  async function createComment(threadId, { content }) {
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -178,7 +182,7 @@ const api = (() => {
 
   async function upVoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/up-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -191,11 +195,13 @@ const api = (() => {
     if (status !== 'success') {
       throw new Error(message);
     }
+
+    return true;
   }
 
   async function downVoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/down-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -212,7 +218,7 @@ const api = (() => {
 
   async function neutralVoteThread(id) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/neutral-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -229,7 +235,7 @@ const api = (() => {
 
   async function upVoteComment(threadId, commentId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -246,7 +252,7 @@ const api = (() => {
 
   async function downVoteComment(threadId, commentId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -263,7 +269,7 @@ const api = (() => {
 
   async function neutralVoteComment(threadId, commentId) {
     const response = await _fetchWithAuth(`${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`, {
-      methos: 'POST',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

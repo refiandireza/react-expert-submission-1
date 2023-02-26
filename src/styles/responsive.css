@@ -58,10 +58,106 @@
         max-width: 50%;
     }
 
+    .btn-category {
+        visibility: hidden;
+    }
+
+    .homepage h1 {
+        display: none;
+    }
+
+    .header {
+        padding: 0 25px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: row;
+        background-color: #FAF8F1;
+    }
+
+    main .sidebar {
+    width: 25%;
+    padding: 25px;
+    /* height: 100vh; */
+    background-color: #fff;
+    border-right: 1px solid #d1d5db;
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    display: block;
+    visibility: visible;
+}
+
+    .homepage, .leaderboard-page, .detail-page {
+        width: 75%;
+        margin-left: 25%;
+        padding: 25px 50px;
+    }
+
+    footer {
+        z-index: 100;
+    }
+
+    .threads-list {
+        margin-top: unset;
+    }
+
+    .modal-card {
+        padding: 30px;
+    }
+
+    .modal-card h3 {
+        text-align: center;
+    }
+
+    .detail-page {
+        background-color: #fff;
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    }
+
+    .btn-theme__desktop {
+        visibility: visible;
+        display: block;
+    }
+
+    .login-page, .register-page {
+        width: 100%;
+    }
+
+    .not-found-page {
+        width: 100%;
+    }
+
 }
 
 @media only screen and (min-width: 1440px) {
     .login-card, .register-card {
         min-width: 70%;
+    }
+
+    main .sidebar {
+    width: 20%;
+}
+
+    .homepage, .leaderboard-page, .detail-page {
+        width: 80%;
+        margin-left: 20%;
+        padding: 50px;
+    }
+
+    .thread-item {
+        max-width: 90%;
+        margin-bottom: unset;
+
+    }
+
+    .threads-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        min-height: unset;
+        /* justify-content: center; */
     }
 } 

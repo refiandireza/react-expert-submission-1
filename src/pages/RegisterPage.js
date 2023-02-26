@@ -11,7 +11,7 @@ function RegisterPage() {
 
   const onRegister = ({ name, email, password }) => {
     dispatch(asyncRegisterUser({ name, email, password }));
-    navigate('/');
+    navigate('/login');
   };
   return (
     <section className="register-page">
@@ -29,7 +29,7 @@ function RegisterPage() {
             <p>
               Already have an account?
               {' '}
-              <Link to="/">Login</Link>
+              <Link to="/login">Login</Link>
             </p>
           </article>
         </div>
